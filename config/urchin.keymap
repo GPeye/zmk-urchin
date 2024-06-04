@@ -12,9 +12,10 @@
 // Layer definitions
 #define BASE 0
 #define SYM 1
-#define EXT 2
-#define FNC 3
-#define SETTINGS 6
+#define NUM 2
+#define MOUS 3
+#define FNC 4
+#define SETTINGS 5
 // -----------------
 
 &sk {
@@ -37,6 +38,24 @@
 			quick-tap-ms = <200>;
 			bindings = <&kp>, <&kp>;
 		};
+		lh_pht: left_positional_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-unless-interrupted";
+            tapping-term-ms = <100>;                        // <---[[produces tap if held longer than tapping-term-ms]]
+            quick-tap-ms = <200>;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 25 26 27 28 29>;    // <---[[right-hand keys]]
+        };
+		rh_pht: right_positional_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-unless-interrupted";
+            tapping-term-ms = <100>;                        // <---[[produces tap if held longer than tapping-term-ms]]
+            quick-tap-ms = <200>;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24>;    // <---[[left-hand keys]]
+        };
 	};
 
 	macros {
@@ -74,42 +93,53 @@
 		default_layer {
 			label = "Base";
 			bindings = <
-			&kp B &kp Y &kp O &kp U &kp APOS        &kp SEMI &kp L &kp D &kp W &kp V
-			&kp C &kp I &kp E &kp A &kp COMMA       &kp DOT  &kp H &kp T &kp S &kp N
-			&kp G &kp X &kp J &kp K &kp UNDER       &kp FSLH &kp R &kp M &kp F &kp P
-			       &mo EXT &qt LSHIFT SPACE           &kp SPACE &sl SYM
+			&kp B &kp Y &kp O &kp U &kp APOS                                              &kp SEMI &kp L &kp D &kp W &kp V
+			&lh_pht LWIN C &lh_pht LALT I &lh_pht LCTRL E &lh_pht LSHFT A &kp COMMA       &kp DOT  &rh_pht RSHFT H &rh_pht RCTRL T &rh_pht RALT S &rh_pht RWIN N
+			&kp G &kp X &kp J &kp K &kp UNDER                                             &kp FSLH &kp R &kp M &kp F &kp P
+			       &mo NUM &kp BACKSPACE                                                  &kp SPACE &mo SYM 
 			>;
 		};
 
 		// Numbers and high frequency symbols
 		sym_layer {
-			label = "Sym.";
+			label = "Sym";
 			bindings = <
-			&kp N1 &kp N2 &kp N3 &kp N4 &kp N5		                                    &kp N6 &kp N7 &kp N8 &kp N9 &kp N0
-			&none &none &none &none &none				          &none &none &none &none &none
-			&none &none &none &none &none				          &none &none &none &none &none 
-							  &none &none              &none &none  
+			&kp TILDE &kp LC(LEFT) &kp UP   &kp LC(RIGHT) &kp Q		        &kp PG_UP &kp AMPS &kp ASTRK &kp LPAR  &kp RPAR
+			&kp HOME  &kp LEFT 	   &kp DOWN &kp RIGHT     &kp END		    &kp PG_DN &kp DLLR &kp PRCNT &kp ARET  &kp MINUS
+			&kp LBKT  &kp RBKT     &kp TAB  &kp LS(LBKT)  &kp LS(RBKT)		&kp BSLH  &kp EXCL &kp AT    &kp POUND &kp PLUS 
+							                      &to MOUS &kp DEL              &kp SPACE &none  
 			>;
 		};
 
 		// Main modifiers and arrow keys
 		ext_layer {
-			label = "Mods";
+			label = "NUM";
 			bindings = <
-			&kp ESC  &kp C_PREV &kp C_PP  &kp C_NEXT  &kp C_PAUSE    	&kp PG_UP  &kp HOME &kp UP &kp END &kp CAPS
-			&sk LALT &sk LGUI  &sk LSHIFT  &sk LCTRL  &kp RALT 			&kp PG_DN &kp LEFT  &kp DOWN  &kp RIGHT   &kp DEL
-			&kp LC(Z)  &kp LC(X) &kp LC(C) &kp TAB   &kp LC(V)          &kp LC(BSPC) &kp BSPC &trans &trans  &trans
-																		&trans &kp LCTRL    &kp ENTER  &mo FNC 
+			&kp ESC  &none &kp PG_UP  &none  &kp C_PAUSE    	&kp Z  &kp N7 &kp N8 &kp N9 &kp N0
+			&kp LC(A) &kp LC(S)  &kp PG_DN  &kp LC(F)  &kp LC(H) 			&kp EQUAL &kp N4 &kp N5 &kp N6 &kp MINUS
+			&kp LC(Z)  &kp LC(X) &kp LC(C) &kp LC(V)   &kp LC(Y)          &kp DOT &kp N1 &kp N2 &kp N3 &kp PLUS
+												&trans &trans    &kp ENTER  &mo FNC 
+			>;
+		};
+
+		// Function keys with modifiers
+		mouse_layer {
+			label = "MOUS";
+			bindings = <
+			&to BASE &kp F2 &kp F3 &kp F4 &kp F5                  &kp F6 &kp F7 &kp F8 &kp F9 &kp F10 
+			&sk LALT &sk LGUI &sk LSHIFT &sk LCTRL &kp RALT     &kp F11 &kp F12  &kp PRINTSCREEN &trans &trans
+			&none &none &none &none &none				          &none &none &none &none &none 
+							  &none &none              &none &none  
 			>;
 		};
 
 		// Function keys with modifiers
 		fnc_layer {
-			label = "FRow";
+			label = "FUNC";
 			bindings = <
-			&kp F1 &kp F2 &kp F3 &kp F4 &kp F5                  &kp F6 &kp F7 &kp F8 &kp F9 &kp F10 
-			&sk LALT &sk LGUI &sk LSHIFT &sk LCTRL &kp RALT     &kp F11 &kp F12  &kp PRINTSCREEN &trans &trans
-			&none &none &none &none &none				          &none &none &none &none &none 
+			&kp F1 &kp F2 &kp F3 &kp F4 &kp F5                  &none &kp F7 &kp F8 &kp F9 &kp F10 
+			&sk LALT &sk LGUI &sk LSHIFT &sk LCTRL &kp RALT     &none &kp F4 &kp F5 &kp F6 &kp F11
+			&none &none &none &none &none				        &none &kp F1 &kp F2 &kp F3 &kp F12
 							  &none &none              &none &none  
 			>;
 		};
