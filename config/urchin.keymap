@@ -158,7 +158,7 @@
 		};
 
 		// Game layer 2
-		gaming_layer {
+		gaming_layer2 {
 				label = "Game2";
 				bindings = <
 				&kp GRAVE &kp N1 &kp N2 &kp N3 &kp N4               &kp B &kp Q &kp W &kp E &kp R 
