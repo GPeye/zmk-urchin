@@ -163,7 +163,7 @@
 				bindings = <
 				&kp GRAVE &kp N1 &kp N2 &kp N3 &kp N4               &kp B &kp Q &kp W &kp E &kp R 
 				&kp LSHFT &kp T &kp G &kp B &kp N5  				&kp B &kp Q &kp W &kp E &kp R 
-				&kp LCTRL &kp J &kp I &kp M &kp N6               &kp B &kp Q &kp W &kp E &kp R 
+				&kp ESC &kp J &kp I &kp M &kp N6               &kp B &kp Q &kp W &kp E &kp R 
 								&none &none                         &none &none 
 				>;
 		};
