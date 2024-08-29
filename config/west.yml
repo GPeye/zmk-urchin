@@ -4,7 +4,7 @@ manifest:
     - name: zmkfirmwareforki
       url-base: https://github.com/GPeye
     - name: urob
-      url-base: https://github.com/urob
+      url-base: https://github.com/GPeye
   projects:
     - name: zmk
       remote: urob
