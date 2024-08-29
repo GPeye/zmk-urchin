@@ -1,11 +1,14 @@
 manifest:
   remotes:
-    - name: urob
+    - name: gpeye
       url-base: https://github.com/GPeye
   projects:
     - name: zmk
-      remote: urob
+      remote: gpeye
       revision: main
       import: app/west.yml
+    - name: zmk-periph-urchin
+      remote: gpeye
+      revision: main
   self:
     path: config
