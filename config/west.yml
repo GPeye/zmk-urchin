@@ -7,7 +7,7 @@ manifest:
       remote: gpeye
       revision: main
       import: app/west.yml
-    - name: urchin-peripheral-animation
+    - name: mario-peripheral-animation
       remote: gpeye
       revision: main
   self:
