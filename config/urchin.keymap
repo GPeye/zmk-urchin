@@ -6,15 +6,15 @@
  * keys: https://zmk.dev/docs/codes
  */
 
-#define ZMK_MOUSE_DEFAULT_MOVE_VAL 1500  // 600
-#define ZMK_MOUSE_DEFAULT_SCRL_VAL 20    // 10
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 1500  // 600
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 20    // 10
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
-#include <dt-bindings/zmk/mouse.h>
-#include <behaviors/mouse_keys.dtsi>
+#include <dt-bindings/zmk/pointing.h>
+//#include <behaviors/mouse_keys.dtsi>
 
 &mmv {
   acceleration-exponent = <1>;      // 1
@@ -139,9 +139,9 @@
 		settings_layer {
 				label = "Sett.";
 				bindings = <
-				&bootloader &none &none &bt BT_CLR &bt BT_SEL 0               &bt BT_SEL 3 &none &none &none &bootloader 
+				&bootloader &none &none &none &bt BT_SEL 0               &bt BT_SEL 3 &none &none &none &bootloader 
 				&none &none &none &none      &bt BT_SEL 1 						  &bt BT_SEL 4 &none &none &none &none
-				&none &none &none &none      &bt BT_SEL 2               &bt BT_SEL 5 &none &none &none &none
+				&bt BT_CLR &none &none &none      &bt BT_SEL 2               &bt BT_SEL 5 &none &none &none &none
 										&none &none                         &none &none 
 				>;
 		};
